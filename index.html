@@ -166,12 +166,12 @@ body{font-size:17px}
 #events.on,#park.on,#lantern.on{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}
 #events>.alert,#park>.alert{grid-column:1/-1}
 #schedule{max-width:900px;margin:0 auto}
-#campus.on{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:stretch}
-#campus>.card:first-child{grid-column:1;grid-row:1}
-#campus>.card:last-child{grid-column:2;grid-row:1}
-#campus>.seg{grid-column:1/-1;grid-row:2}
-#campus>.mw{grid-column:1/-1;grid-row:3;max-height:82vh}
-#campus>.note{grid-column:1/-1;grid-row:4}
+#campus.on{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);grid-template-rows:auto 1fr auto auto;gap:0 24px;align-items:start}
+#campus>.card:first-child{grid-column:1;grid-row:1/3}
+#campus>.card:last-child{grid-column:1;grid-row:3}
+#campus>.note{grid-column:1;grid-row:4}
+#campus>.seg{grid-column:2;grid-row:1}
+#campus>.mw{grid-column:2;grid-row:2/5;max-height:78vh}
 #booths .field{padding:14px}
 .col{grid-auto-rows:66px}
 .bt{min-height:64px;font-size:14px}
