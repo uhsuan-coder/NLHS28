@@ -126,6 +126,61 @@ select{text-overflow:ellipsis;min-height:44px}
 @media(max-width:379px){.two{grid-template-columns:1fr}.q{grid-template-columns:1fr}h1{letter-spacing:0}.row{grid-template-columns:70px 1fr}.lgf{height:36px}}
 @media(max-width:340px){body{font-size:15px}.chip{padding:8px 11px}}
 @media(min-width:768px){body{font-size:17px}.wrap{max-width:760px}}
+
+/* ===== 平板／電腦自適應版面 ===== */
+@media(min-width:768px){
+.wrap,header .in,#bnr a{max-width:920px}
+.lgf{height:72px}
+header{padding-top:16px;padding-bottom:14px}
+header h1{font-size:30px;margin:8px 0 10px}
+.dates p,.dates b{font-size:18px}
+.cd{font-size:14px}.cd b{font-size:20px}
+nav{justify-content:center}
+nav a{padding:14px 18px;font-size:17px}
+h2{font-size:22px}
+.card{padding:18px 22px}
+.q{grid-template-columns:repeat(3,1fr);gap:14px}
+.q a{padding:18px 56px 18px 18px;font-size:18px}
+.row{grid-template-columns:110px 1fr}
+.row.now{margin:0 -22px;padding-left:22px;padding-right:22px}
+.field{padding:12px;gap:4px;min-width:0}
+.col{grid-auto-rows:60px;gap:4px}
+.mid{grid-template-columns:72px minmax(0,1fr) 72px;gap:4px}
+.mid .c{font-size:30px}
+.bt{min-height:58px;font-size:13px}
+.bt .no{font-size:11px;padding:2px 6px}
+.bt .cn{font-size:13px}
+.map{overflow:visible}
+.mw{max-height:78vh}
+.cl{display:grid;grid-template-columns:repeat(2,1fr);gap:0 12px}
+.cl h2{grid-column:1/-1}
+.seg button{font-size:16px}
+}
+@media(min-width:1100px){
+.wrap,header .in,#bnr a{max-width:1180px}
+.lgf{height:84px}
+header h1{font-size:34px}
+.dates p,.dates b{font-size:19px}
+body{font-size:17px}
+#home.on{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}
+#events.on,#park.on,#lantern.on{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}
+#events>.alert,#park>.alert{grid-column:1/-1}
+#schedule{max-width:900px;margin:0 auto}
+#campus.on{display:grid;grid-template-columns:360px minmax(0,1fr);gap:0 24px;align-items:start}
+#campus>.card:first-child{grid-column:1;grid-row:1}
+#campus>.seg{grid-column:2;grid-row:1}
+#campus>.mw{grid-column:2;grid-row:2/5;max-height:82vh}
+#campus>.note{grid-column:1;grid-row:2}
+#campus>.card:last-child{grid-column:1;grid-row:3}
+#booths .field{padding:14px}
+.col{grid-auto-rows:66px}
+.bt{min-height:64px;font-size:14px}
+.bt .cn{font-size:15px}
+.bt .no{font-size:12px}
+.mid .c{font-size:34px}
+.cl{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:1500px){.wrap,header .in,#bnr a{max-width:1320px}.col{grid-auto-rows:72px}.bt{min-height:70px}}
 </style>
 </head>
 <body>
