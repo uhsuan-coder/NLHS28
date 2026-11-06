@@ -233,6 +233,7 @@ body{font-size:17px}
 <section id="schedule">
 <div class="seg" role="group" aria-label="選擇日期"><button data-d="0" aria-pressed="false">11/6（五）運動會</button><button data-d="1" aria-pressed="true">11/7（六）園遊會</button></div>
 <div class="card" id="sl"></div>
+<div class="note" id="ut1" style="margin:-4px 0 10px"></div>
 <div class="alert" id="n0"><b>11/6（五）校內安排</b>：當日第 1–7 節無課程，第 8 節輔導課暫停一次。若遇雨，早上 8:00 公告運動項目比賽是否延期；延期則當天啟動雨天備案，第 1–7 節按課表照常上課，無第 8 節（校車依運動會時間發車）。<br><b>熱食部「紅蕃茄」供餐。</b><br><b>OK超商</b>正常營業到 16:00。</div>
 <div class="alert" id="n1" hidden><b>11/7（六）學生專車停駛</b>：因當天適逢假日，桃園客運司機人力調節及嚴重短缺，上、放學學生專車均停駛，請學生利用大眾運輸工具自行前往學校。<br><b>熱食部「紅蕃茄」不供餐，請同學留意。</b><br><b>OK超商</b>整天不營業。</div>
 <p class="note">時間為預定時間，現場請依工作人員與老師指示。</p>
@@ -240,6 +241,7 @@ body{font-size:17px}
 
 <section id="results">
 <div class="alert"><b>11/6（五）運動會成績</b>：依大會公布陸續更新，成績依大會公布名次列出，以現場公告為準。</div>
+<div class="note" id="ut2" style="margin:-6px 0 10px"></div>
 <div id="rs2"></div>
 </section>
 
@@ -331,7 +333,8 @@ var RES=[["200 公尺決賽",[["202","蔣畯丞","24\"70"],["205","鄭為宇","2
 ["800 公尺計時決賽",[["116","張軒碩","2'22\"68"],["215","方瀚霆","2'27\"46"],["202","詹儒侑","2'29\"37"],["212","黃昀承","2'31\"39"],["218","陳奕廷","2'32\"50"],["307","林恩佐","2'33\"02"],["113","黃祺嘉","2'34\"23"],["117","張庭睿","2'37\"52"]],[["103","林詩雅","3'00\"33"],["219","林宥岑","3'01\"70"],["212","許悅翎","3'06\"51"],["102","賴宜萱","3'13\"34"],["306","彭若絜","3'17\"32"],["112","楊昀霏","3'17\"67"],["116","廖莉雯","3'21\"45"],["307","鄭涵瑄","3'29\"87"]]],
 ["1500 公尺計時決賽",[["116","張軒碩","5'00\"96"],["215","劉康揚","5'02\"25"],["105","馮天楷","5'29\"53"],["118","陳為甫","5'33\"76"],["113","黃祺嘉","5'35\"44"],["218","楊柏鴻","5'38\"79"],["312","謝主羊","5'43\"01"],["115","何宜忠","5'51\"08"]],[["116","郭永涵","6'31\"07"],["104","李宜庭","6'32\"57"],["112","楊昀霏","7'02\"82"],["212","許悅翎","7'18\"88"],["102","林顥紜","7'53\"44"],["110","王子欣","8'16\"60"],["211","李懷恩","8'18\"62"],["218","謝晴妤","8'21\"61"]]]];
 function rtab(t,l){return '<h3>'+t+'</h3><table><thead><tr><th>名次</th><th>班級</th><th>姓名</th><th>成績</th></tr></thead><tbody>'+l.map(function(r,i){return '<tr><td>'+(i<3?'<span class="md" role="img" aria-label="第'+(i+1)+'名">'+['🥇','🥈','🥉'][i]+'</span>':'<span class="rk">'+(i+1)+'</span>')+'</td><td class="cls">'+r[0]+'</td><td><b>'+esc(r[1])+'</b></td><td>'+esc(r[2])+'</td></tr>'}).join("")+'</tbody></table>'}
-$("rs2").innerHTML='<div class="rg">'+RES.map(function(e){return '<div class="card rt"><h2>'+e[0]+'</h2>'+rtab("男生組",e[1])+rtab("女生組",e[2])+'</div>'}).join("")+'</div>';
+function renderRes(){$("rs2").innerHTML='<div class="rg">'+RES.map(function(e){return '<div class="card rt"><h2>'+e[0]+'</h2>'+rtab("男生組",e[1])+rtab("女生組",e[2])+'</div>'}).join("")+'</div>';}
+renderRes();
 var CAT={"101":"d","102":"dtg","103":"st","104":"d","105":"dt","106":"g","107":"dst","108":"t","109":"dt","110":"tg","111":"ds","112":"dtg","113":"t","114":"dst","115":"dtg","116":"d","117":"d","118":"d","119":"dt","201":"ds","202":"ds","203":"st","204":"dst","205":"dtg","206":"dst","207":"d","208":"ds","209":"dst","210":"dt","211":"tg","212":"t","213":"dt","214":"dst","215":"ds","216":"dtg","217":"dg","218":"sg","219":"s"};
 var CC={d:["飲料","#2b7bd6"],s:["鹹食","#e8761a"],t:["甜食","#d6457f"],g:["遊戲・其他","#7a4fc9"]},cat="";
 function cbar(l){var c=CAT[l]||"";return c?'<span class="cb" aria-hidden="true">'+c.split("").map(function(k){return'<i style="background:'+CC[k][1]+'"></i>'}).join("")+'</span>':''}
@@ -428,7 +431,11 @@ $("b3").onclick=function(){t3=!t3;this.setAttribute("aria-pressed",String(t3));r
 $("cm").addEventListener("click",function(e){var g=e.target.closest(".pin");if(g){to=+g.dataset.i;$("sto").value=to;rs(1);return}
  var r=$("cm"),pt=r.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var q=pt.matrixTransform(r.getScreenCTM().inverse());meP={x:q.x,y:q.y};N.me=[q.x,q.y];meA=nn(q.x,q.y);meN="me";$("sme").value="-1";rs()});
 rs();
-buildMap();renderSched();cd();route();setInterval(function(){cd();renderSched()},60000);
+var lastD="",DATA_URL="data.json";
+function setUT(u){var t=u?"資料更新時間："+esc(u):"";["ut1","ut2"].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=t})}
+function applyData(o,raw){if(!o||raw===lastD)return;lastD=raw;if(o.D1)D1=o.D1;if(o.D2)D2=o.D2;if(o.RES)RES=o.RES;setUT(o.updated);renderSched();renderRes()}
+function pull(){try{fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){applyData(JSON.parse(t),t)}).catch(function(){})}catch(e){}}
+buildMap();renderSched();cd();route();setInterval(function(){cd();renderSched()},60000);pull();setInterval(pull,45000);document.addEventListener("visibilitychange",function(){if(!document.hidden)pull()});
 </script>
 </body>
 </html>
