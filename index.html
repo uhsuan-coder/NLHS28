@@ -189,6 +189,16 @@ body{font-size:17px}
 .row .xn{grid-column:2;margin-top:10px}
 .subn.hot{background:#ffb300;color:#3b2200;border-left:0;border-radius:8px;padding:8px 12px;font-weight:800;font-size:16px}
 .sub li.dn{color:var(--mute);text-decoration:line-through}.sub li.dn .tag{text-decoration:none;display:inline-block;margin-left:8px}
+.rg{display:grid;gap:14px}.rg .card{margin:0}.rg h2{margin:0 0 10px}
+.rt h3{margin:12px 0 6px;font-size:15px;color:var(--red)}.rt h3:first-of-type{margin-top:0}
+.rt table{width:100%;border-collapse:collapse;font-size:15px}.rt th{font-size:12px;color:var(--mute);font-weight:500;text-align:left;padding:2px 6px 4px;border-bottom:1px solid var(--line)}
+.rt td{padding:7px 6px;border-bottom:1px solid var(--line)}.rt td:last-child,.rt th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.rk{display:inline-block;min-width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;font-weight:700;font-size:13px;background:#eef0f4;color:#555}
+.rk.r1{background:#f6c445;color:#4a3500}.rk.r2{background:linear-gradient(135deg,#e8ecf1,#8f9aaa);color:#1c2430;box-shadow:0 0 0 2px #6f7b8c}.rk.r3{background:#d9985f;color:#3d1f00}
+.cls{color:var(--mute);font-variant-numeric:tabular-nums}
+.rt td b{font-weight:600}
+@media(min-width:768px){#results.on .rg{grid-template-columns:repeat(3,1fr)}}
+.md{display:inline-block;min-width:24px;text-align:center;font-size:22px;line-height:24px}
 </style>
 </head>
 <body>
@@ -199,7 +209,7 @@ body{font-size:17px}
 <div class="cd" id="cd"></div>
 </div></header>
 <nav aria-label="主選單">
-<a href="#home">首頁</a><a href="#schedule">時程</a><a href="#events">活動</a><a href="#booths">攤位</a><a href="#campus">校園地圖</a><a href="#park">停車</a><a href="#lantern">掛燈籠</a>
+<a href="#home">首頁</a><a href="#schedule">時程</a><a href="#results">成績</a><a href="#events">活動</a><a href="#booths">攤位</a><a href="#campus">校園地圖</a><a href="#park">停車</a><a href="#lantern">掛燈籠</a>
 </nav>
 <main class="wrap">
 
@@ -225,6 +235,11 @@ body{font-size:17px}
 <div class="alert" id="n0"><b>11/6（五）校內安排</b>：當日第 1–7 節無課程，第 8 節輔導課暫停一次。若遇雨，早上 8:00 公告運動項目比賽是否延期；延期則當天啟動雨天備案，第 1–7 節按課表照常上課，無第 8 節（校車依運動會時間發車）。<br><b>熱食部「紅蕃茄」供餐。</b><br><b>OK超商</b>正常營業到 16:00。</div>
 <div class="alert" id="n1" hidden><b>11/7（六）學生專車停駛</b>：因當天適逢假日，桃園客運司機人力調節及嚴重短缺，上、放學學生專車均停駛，請學生利用大眾運輸工具自行前往學校。<br><b>熱食部「紅蕃茄」不供餐，請同學留意。</b><br><b>OK超商</b>整天不營業。</div>
 <p class="note">時間為預定時間，現場請依工作人員與老師指示。</p>
+</section>
+
+<section id="results">
+<div class="alert"><b>11/6（五）運動會成績</b>：依大會公布陸續更新，各項取前 8 名，以現場公告為準。</div>
+<div id="rs2"></div>
 </section>
 
 <section id="events">
@@ -309,6 +324,11 @@ function renderSched(){var d=cur?D2:D1,n=tp(),idx=-1,m=function(x){return +x.sli
  document.querySelectorAll("#schedule .seg button").forEach(function(b){var k=+b.dataset.d;b.setAttribute("aria-pressed",String(k===cur));b.textContent=BTN[k]+(dn(k)?"・已結束":"")});$("n0").hidden=cur!==0||dn(0);$("n1").hidden=cur!==1||dn(1);}
 document.querySelectorAll("#schedule .seg button").forEach(function(b){b.onclick=function(){cur=+b.dataset.d;renderSched()}});
 $("ll").innerHTML=LT.map(function(r){return '<div class="row"><div class="t">'+r[0]+'</div><div class="n">'+esc(r[1])+'</div><div class="p">'+esc(r[2])+'</div></div>'}).join("");
+var RES=[["壘球擲遠",[["104","潘柏愷","73m24"],["307","蕭諺澤","70m01"],["318","張聿亘","67m32"],["308","王宥洛","67m27"],["214","楊承樺","66m36"],["110","古恩宇","64m67"],["215","范澤曦","64m52"],["312","陳治鑄","63m05"]],[["316","黃小宸","55m28"],["311","莊佳芸","41m84"],["213","謝姍汝","40m70"],["104","李宜庭","40m56"],["307","廖婕馨","36m62"],["210","鄭羽淞","34m91"],["206","邱心曖","33m12"],["114","楊彩容","32m41"]]],
+["800 公尺",[["116","張軒碩","2'22\"68"],["215","方瀚霆","2'27\"46"],["202","詹儒侑","2'29\"37"],["212","黃昀承","2'31\"39"],["218","陳奕廷","2'32\"50"],["307","林恩佐","2'33\"02"],["113","黃祺嘉","2'34\"23"],["117","張庭睿","2'37\"52"]],[["103","林詩雅","3'00\"33"],["219","林宥岑","3'01\"70"],["212","許悅翎","3'06\"51"],["102","賴宜萱","3'13\"34"],["306","彭若絜","3'17\"32"],["112","楊昀霏","3'17\"67"],["116","廖莉雯","3'21\"45"],["307","鄭涵瑄","3'29\"87"]]],
+["1500 公尺",[["116","張軒碩","5'00\"96"],["215","劉康揚","5'02\"25"],["105","馮天楷","5'29\"53"],["118","陳為甫","5'33\"76"],["113","黃祺嘉","5'35\"44"],["218","楊柏鴻","5'38\"79"],["312","謝主羊","5'43\"01"],["115","何宜忠","5'51\"08"]],[["116","郭永涵","6'31\"07"],["104","李宜庭","6'32\"57"],["112","楊昀霏","7'02\"82"],["212","許悅翎","7'18\"88"],["102","林顥紜","7'53\"44"],["110","王子欣","8'16\"60"],["211","李懷恩","8'18\"62"],["218","謝晴妤","8'21\"61"]]]];
+function rtab(t,l){return '<h3>'+t+'</h3><table><thead><tr><th>名次</th><th>班級</th><th>姓名</th><th>成績</th></tr></thead><tbody>'+l.map(function(r,i){return '<tr><td>'+(i<3?'<span class="md" role="img" aria-label="第'+(i+1)+'名">'+['🥇','🥈','🥉'][i]+'</span>':'<span class="rk">'+(i+1)+'</span>')+'</td><td class="cls">'+r[0]+'</td><td><b>'+esc(r[1])+'</b></td><td>'+esc(r[2])+'</td></tr>'}).join("")+'</tbody></table>'}
+$("rs2").innerHTML='<div class="rg">'+RES.map(function(e){return '<div class="card rt"><h2>'+e[0]+'</h2>'+rtab("男生組",e[1])+rtab("女生組",e[2])+'</div>'}).join("")+'</div>';
 var CAT={"101":"d","102":"dtg","103":"st","104":"d","105":"dt","106":"g","107":"dst","108":"t","109":"dt","110":"tg","111":"ds","112":"dtg","113":"t","114":"dst","115":"dtg","116":"d","117":"d","118":"d","119":"dt","201":"ds","202":"ds","203":"st","204":"dst","205":"dtg","206":"dst","207":"d","208":"ds","209":"dst","210":"dt","211":"tg","212":"t","213":"dt","214":"dst","215":"ds","216":"dtg","217":"dg","218":"sg","219":"s"};
 var CC={d:["飲料","#2b7bd6"],s:["鹹食","#e8761a"],t:["甜食","#d6457f"],g:["遊戲・其他","#7a4fc9"]},cat="";
 function cbar(l){var c=CAT[l]||"";return c?'<span class="cb" aria-hidden="true">'+c.split("").map(function(k){return'<i style="background:'+CC[k][1]+'"></i>'}).join("")+'</span>':''}
