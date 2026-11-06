@@ -201,7 +201,11 @@ body{font-size:17px}
 .md{display:inline-block;min-width:24px;text-align:center;font-size:22px;line-height:24px}
 .cd{white-space:nowrap}
 .rt td.tm{font-size:13px;color:var(--mute);line-height:1.35}
-.ln{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+.ln{color:inherit;text-decoration:none}
+.go{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;margin-left:8px;border-radius:50%;background:linear-gradient(135deg,#5aa2ff,#2b6fe0);box-shadow:0 2px 6px rgba(43,111,224,.45);vertical-align:middle;animation:gop 2.4s ease-in-out infinite}
+@keyframes gop{0%,100%{box-shadow:0 2px 6px rgba(43,111,224,.45),0 0 0 0 rgba(90,162,255,.5)}60%{box-shadow:0 2px 6px rgba(43,111,224,.45),0 0 0 7px rgba(90,162,255,0)}}
+@media (prefers-reduced-motion:reduce){.go{animation:none}}
+.ln:active .go{transform:scale(.9)}
 #events [id^=e-]{scroll-margin-top:70px}
 #events .fl{outline:2px solid #ffb300;outline-offset:4px;border-radius:10px;transition:outline-color .3s}
 </style>
@@ -331,7 +335,7 @@ function EVL(t){return /高三多元入學/.test(t)?'e-g3':/親職講座|放手�
 function renderSched(){var d=cur?D2:D1,n=tp(),idx=-1,m=function(x){return +x.slice(0,2)*60+ +x.slice(3)},now=m(n[1]),fin=dn(cur),td=n[0]===DAY[cur];
  if(td){d.forEach(function(r,i){var s0=m(r[0]),e0=r[1]?m(r[1]):s0+10;if(now>=s0&&now<e0)idx=i;});}
  $("sl").innerHTML=(fin?'<div class="done">'+BTN[cur].slice(0,9)+' 活動已結束</div>':'')+d.map(function(r,i){var t=r[1]?r[0]+"–"+r[1]:r[0],e0=r[1]?m(r[1]):m(r[0])+10,past=fin||(td&&e0<=now&&i!==idx);
-  return '<div class="row'+(i===idx?' now':'')+(past?' past':'')+'"><div class="t">'+t+'</div><div class="n">'+(cur===1&&EVL(r[2])?'<a class="ln" href="#events" data-go="'+EVL(r[2])+'">'+esc(r[2])+' ›</a>':esc(r[2]))+(i===idx?'<span class="tag">進行中</span>':'')+(past?'<span class="tag" style="background:var(--mute)">已完</span>':'')+'</div><div class="p">'+esc(r[3])+'</div>'+(r[4]?'<ul class="sub">'+r[4].map(function(x){var d=/\|done$/.test(x);x=x.replace(/\|done$/,'');return'<li'+(d?' class="dn"':'')+'>'+esc(x)+'</li>'}).join("")+'</ul><div class="subn">'+esc(r[5]||"")+'</div>'+(r[6]||[]).map(function(x){return'<div class="n xn">'+esc(x[0])+(x[3]?'<span class="tag">'+esc(x[3])+'</span>':'')+'</div><div class="p">'+esc(x[1])+'</div>'+[].concat(x[2]||[]).map(function(t){return'<div class="subn'+(/10:30/.test(t)?" hot":"")+'">'+esc(t)+'</div>'}).join("")}).join(""):"")+'</div>'}).join("");
+  return '<div class="row'+(i===idx?' now':'')+(past?' past':'')+'"><div class="t">'+t+'</div><div class="n">'+(cur===1&&EVL(r[2])?'<a class="ln" href="#events" data-go="'+EVL(r[2])+'">'+esc(r[2])+'<span class="go" role="img" aria-label="點擊看詳情"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span></a>':esc(r[2]))+(i===idx?'<span class="tag">進行中</span>':'')+(past?'<span class="tag" style="background:var(--mute)">已完</span>':'')+'</div><div class="p">'+esc(r[3])+'</div>'+(r[4]?'<ul class="sub">'+r[4].map(function(x){var d=/\|done$/.test(x);x=x.replace(/\|done$/,'');return'<li'+(d?' class="dn"':'')+'>'+esc(x)+'</li>'}).join("")+'</ul><div class="subn">'+esc(r[5]||"")+'</div>'+(r[6]||[]).map(function(x){return'<div class="n xn">'+esc(x[0])+(x[3]?'<span class="tag">'+esc(x[3])+'</span>':'')+'</div><div class="p">'+esc(x[1])+'</div>'+[].concat(x[2]||[]).map(function(t){return'<div class="subn'+(/10:30/.test(t)?" hot":"")+'">'+esc(t)+'</div>'}).join("")}).join(""):"")+'</div>'}).join("");
  document.querySelectorAll("#schedule .seg button").forEach(function(b){var k=+b.dataset.d;b.setAttribute("aria-pressed",String(k===cur));b.textContent=BTN[k]+(dn(k)?"・已結束":"")});$("n0").hidden=cur!==0||dn(0);$("n1").hidden=cur!==1||dn(1);}
 document.querySelectorAll("#schedule .seg button").forEach(function(b){b.onclick=function(){cur=+b.dataset.d;renderSched()}});
 $("ll").innerHTML=LT.map(function(r){return '<div class="row"><div class="t">'+r[0]+'</div><div class="n">'+esc(r[1])+'</div><div class="p">'+esc(r[2])+'</div></div>'}).join("");
