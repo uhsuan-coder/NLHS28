@@ -199,6 +199,7 @@ body{font-size:17px}
 .rt td b{font-weight:600}
 @media(min-width:768px){#results.on .rg{grid-template-columns:repeat(3,1fr)}}
 .md{display:inline-block;min-width:24px;text-align:center;font-size:22px;line-height:24px}
+.cd{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -360,10 +361,10 @@ $("cl").onclick=function(e){var b=e.target.closest(".row2");if(!b)return;var i=+
 $("q").oninput=filter;
 function prog(){var c=Object.keys(vis).length;$("hp").style.width=(c/45*100)+"%";$("ht").textContent=c?"已逛 "+c+" / 45 個攤位":"到「攤位」頁點選攤位，就能標記已逛。";}
 function cd(){var n=tp(),t=new Date("2026-11-07T10:00:00+08:00")-new Date(),e=$("cd");
- if(n[0]===DAY[1]){e.textContent="今天就是園遊會，10:00 開幕。";}
- else if(n[0]===DAY[0]){e.textContent="今天是運動會，明天園遊會。";}
+ if(n[0]===DAY[1]){e.innerHTML="今天就是園遊會<br>10:00 開幕";}
+ else if(n[0]===DAY[0]){e.innerHTML="今天是運動會<br>明天園遊會";}
  else if(t>0){var d=Math.floor(t/864e5),h=Math.floor(t%864e5/36e5);e.innerHTML="距離開幕還有<b>"+d+" 天 "+h+" 小時</b>";}
- else e.textContent="感謝參與，期待明年再見。";}
+ else e.innerHTML="感謝參與<br>期待明年再見";}
 function route(){var h=(location.hash||"#home").slice(1);if(!document.getElementById(h)||h==="main")h="home";
  document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id===h)});
  document.querySelectorAll("nav a").forEach(function(a){if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
